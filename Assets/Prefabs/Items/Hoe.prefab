@@ -79,7 +79,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Icon: {fileID: 21300000, guid: 2efaba8e02f2bf54fb7d4dc62bb733b9, type: 3}
-  FertileSoilPrefab: {fileID: 0}
+  FertileSoilPrefab: {fileID: 1169723980556458, guid: a264c1ec457bf4aca9a5285f16ca59ef,
+    type: 2}
 --- !u!212 &212462648390512592
 SpriteRenderer:
   m_ObjectHideFlags: 1
