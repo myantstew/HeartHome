@@ -26,7 +26,7 @@ public class Hoe : Item {
         if(playerAction.DetectedItem == null)
         {
             var soil = Instantiate(FertileSoilPrefab);
-            //soil.transform.position = playerMovemen
+            soil.transform.position = playerAction.DirectionAperature.transform.position;
         }
     }
 	
