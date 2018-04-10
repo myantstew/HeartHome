@@ -9,6 +9,8 @@ public class PlayerAction : MonoBehaviour {
     [SerializeField] GameObject LeftAperature;  // The "front" of the player.  For use in using items at correct location
     [SerializeField] GameObject UpAperature;  // The "front" of the player.  For use in using items at correct location
 
+    public GameObject DirectionAperature { get { return GetDirection(); } }
+
     CharacterMovement Movement;
 
 	// Use this for initialization
@@ -27,22 +29,7 @@ public class PlayerAction : MonoBehaviour {
 			if (DetectedItem == null) {
                 if(Inventory.Current.SelectedIventoryItem != null)
                 {
-                    switch(Movement.Direction)
-                    {
-                        case FacingDirection.Up:
-                            Inventory.Current.SelectedIventoryItem.UseAt(UpAperature);
-                            break;
-                        case FacingDirection.Down:
-                            Inventory.Current.SelectedIventoryItem.UseAt(DownAperature);
-                            break;
-                        case FacingDirection.Left:
-                            Inventory.Current.SelectedIventoryItem.UseAt(LeftAperature);
-                            break;
-                        case FacingDirection.Right:
-                            Inventory.Current.SelectedIventoryItem.UseAt(RightAperature);
-                            break;
-                    }
-                    //Inventory.Current.SelectedIventoryItem.UseAt(Aperature);
+                    Inventory.Current.SelectedIventoryItem.UseAt(DirectionAperature);
                 }
                 return;
 			}
@@ -55,6 +42,31 @@ public class PlayerAction : MonoBehaviour {
             Inventory.Current.AddInventory(DetectedItem.GetComponent<IItem>());
         }		
 	}
+
+    GameObject GetDirection()
+    {
+        GameObject Aperature = null;
+        switch (Movement.Direction)
+        {
+            case FacingDirection.Up:
+                Aperature = UpAperature;
+                break;
+            case FacingDirection.Down:
+                Aperature = DownAperature;
+                break;
+            case FacingDirection.Left:
+                Aperature = LeftAperature;
+                break;
+            case FacingDirection.Right:
+                Aperature = RightAperature;
+                break;
+            default:
+                Aperature = DownAperature;
+                break;
+        }
+
+        return Aperature;
+    }
 
 	void OnTriggerEnter2D(Collider2D collider) {
 		this.DetectedItem = collider.gameObject;	
