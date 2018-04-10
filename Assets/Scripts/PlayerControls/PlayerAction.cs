@@ -27,21 +27,27 @@ public class PlayerAction : MonoBehaviour {
         if(Input.GetButtonDown("Action"))
         {
 			if (DetectedItem == null) {
-                if(Inventory.Current.SelectedIventoryItem != null)
-                {
-                    Inventory.Current.SelectedIventoryItem.UseAt(DirectionAperature);
-                }
+                UseItem(DirectionAperature);
                 return;
 			}
 
 			var item = DetectedItem.GetComponent<IItem>();
 			if (item == null) {
-				return;
-			}
+                UseItem(DetectedItem);
+                return;
+            }
 
             Inventory.Current.AddInventory(DetectedItem.GetComponent<IItem>());
         }		
 	}
+
+    void UseItem(GameObject location)
+    {
+        if (Inventory.Current.SelectedIventoryItem != null)
+        {
+            Inventory.Current.SelectedIventoryItem.UseAt(location);
+        }
+    }
 
     GameObject GetDirection()
     {
